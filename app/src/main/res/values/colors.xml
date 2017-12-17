@@ -6,4 +6,11 @@
 
     <color name="alpha_black_50">#80000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="cloud_burst">#213449</color>
+
+    <color name="gray_600">#757575</color>
+    <color name="gray_700">#616161</color>
+    <color name="gray_800">#424242</color>
+
+
 </resources>
