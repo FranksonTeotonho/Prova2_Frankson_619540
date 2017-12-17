@@ -30,7 +30,7 @@ public class Desafio2Api {
     private Desafio2Api() {
         Retrofit retrofit = new Retrofit
                 .Builder()
-                .baseUrl("https://dl.dropboxusercontent.com/s/50vmlj7dhfaibpj/")
+                .baseUrl("https://dl.dropboxusercontent.com/")
                 .addConverterFactory(defaultConvertFactory())
                 .build();
 

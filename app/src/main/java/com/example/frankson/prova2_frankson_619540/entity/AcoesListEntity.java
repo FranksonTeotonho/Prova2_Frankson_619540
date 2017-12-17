@@ -1,5 +1,8 @@
 package com.example.frankson.prova2_frankson_619540.entity;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -7,10 +10,9 @@ import java.util.List;
  */
 
 public class AcoesListEntity {
+    @SerializedName("acoes_sociais")
+    @Expose
+    private List<AcaoEntity> acoes = null;
 
-    private List<AcaoEntity> acoes;
-
-    public List<AcaoEntity> getAcoes() {
-        return acoes;
-    }
+    public List<AcaoEntity> getAcoes() { return acoes; }
 }

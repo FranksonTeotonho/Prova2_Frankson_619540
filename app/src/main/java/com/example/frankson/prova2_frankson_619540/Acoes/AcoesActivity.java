@@ -2,6 +2,8 @@ package com.example.frankson.prova2_frankson_619540.Acoes;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -10,7 +12,6 @@ import android.widget.Toast;
 import com.example.frankson.prova2_frankson_619540.R;
 import com.example.frankson.prova2_frankson_619540.entity.AcaoEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -36,16 +37,14 @@ public class AcoesActivity extends AppCompatActivity implements AcoesView{
         }
 
         ButterKnife.bind(this);
-        List<AcaoEntity> l = new ArrayList<>();
-        AcaoEntity a = new AcaoEntity("PLP 2.0", "http://s2.glbimg.com/HuBW1kt_fTAKC0s4C0KxGeMBVXM=/0x0:1353x821/695x422/s.glbimg.com/po/tt2/f/original/2014/04/30/conservation_1.jpg");
-        l.add(a);
+
         acoesPresenter = new AcoesPresenter(this);
         acoesPresenter.setAdapterList();
 
     }
 
     @Override
-    public void setList(final List<AcaoEntity> acoesList) {
+    public void setList(List<AcaoEntity> acoesList) {
 
         AcoesAdapter acoesAdapter = new AcoesAdapter(acoesList ,this);
 
@@ -56,7 +55,15 @@ public class AcoesActivity extends AppCompatActivity implements AcoesView{
             }
 
         });
+
         rvAcoes.setAdapter(acoesAdapter);
+
+        // criação do gerenciador de layouts
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(this, layoutManager.getOrientation());
+        rvAcoes.setLayoutManager(layoutManager);
+        rvAcoes.addItemDecoration(dividerItemDecoration);
     }
 
     @Override

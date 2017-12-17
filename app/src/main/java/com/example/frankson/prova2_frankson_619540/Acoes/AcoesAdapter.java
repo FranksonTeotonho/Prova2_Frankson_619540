@@ -26,7 +26,7 @@ public class AcoesAdapter extends RecyclerView.Adapter<AcoesAdapter.ViewHolder>{
 
     private Context context;
     private List<AcaoEntity> acoesList;
-    OnRecyclerViewSelected mOnRecyclerViewSelected;
+    OnRecyclerViewSelected onRecyclerViewSelected;
 
     //Construtor que recebe a lista
     AcoesAdapter(List<AcaoEntity> acoesList, Context context) {
@@ -47,7 +47,6 @@ public class AcoesAdapter extends RecyclerView.Adapter<AcoesAdapter.ViewHolder>{
         AcaoEntity acaoEntity = acoesList.get(position);
 
         holder.txAcaoName.setText(acaoEntity.getName());
-
         Picasso.with(context)
                 .load(acaoEntity.getImage())
                 .centerCrop()
@@ -78,14 +77,14 @@ public class AcoesAdapter extends RecyclerView.Adapter<AcoesAdapter.ViewHolder>{
         //seta o clique rápido
         @OnClick(R.id.container)
         void onItemClick(View view){
-            if(mOnRecyclerViewSelected != null)
-                mOnRecyclerViewSelected.onClick(view, getAdapterPosition());
+            if(onRecyclerViewSelected != null)
+                onRecyclerViewSelected.onClick(view, getAdapterPosition());
         }
 
 
     }
 
     public void setOnRecyclerViewSelected(OnRecyclerViewSelected onRecyclerViewSelected){
-        this.mOnRecyclerViewSelected = onRecyclerViewSelected;
+        this.onRecyclerViewSelected = onRecyclerViewSelected;
     }
 }

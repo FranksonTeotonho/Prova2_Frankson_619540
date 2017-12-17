@@ -11,6 +11,6 @@ import retrofit2.http.GET;
 
 public interface Desafio2Service {
 
-    @GET("sociais.json")
+    @GET("s/50vmlj7dhfaibpj/sociais.json")
     Call<AcoesListEntity> getAcoes();
 }

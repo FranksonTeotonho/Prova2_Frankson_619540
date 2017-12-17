@@ -31,7 +31,9 @@ public class AcoesPresenter {
             public void onResponse(Call<AcoesListEntity> call, Response<AcoesListEntity> response) {
 
                 AcoesListEntity acoesListEntity = response.body();
-                if(acoesListEntity != null){
+
+                if(acoesListEntity != null && acoesListEntity.getAcoes() != null){
+
                     acoesView.setList(acoesListEntity.getAcoes());
 
                 } else{
