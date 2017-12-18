@@ -45,6 +45,7 @@ public class AcoesPresenter {
             @Override
             public void onFailure(Call<AcoesListEntity> call, Throwable t) {
                 acoesView.showMessage("Falha no acesso ao servidor");
+                acoesView.hideLoading();
             }
         });
     }
