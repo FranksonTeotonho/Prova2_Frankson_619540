@@ -1,11 +1,14 @@
 package com.example.frankson.prova2_frankson_619540.Acoes;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -13,6 +16,8 @@ import android.widget.Toast;
 import com.example.frankson.prova2_frankson_619540.AcoesDetalhes.AcoesDetailActivity;
 import com.example.frankson.prova2_frankson_619540.R;
 import com.example.frankson.prova2_frankson_619540.entity.AcaoEntity;
+import com.example.frankson.prova2_frankson_619540.entity.AcoesListEntity;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -36,12 +41,31 @@ public class AcoesActivity extends AppCompatActivity implements AcoesView{
         //Altera o titulo da action bar ActionBar
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Ações");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         ButterKnife.bind(this);
 
         acoesPresenter = new AcoesPresenter(this);
         acoesPresenter.setAdapterList();
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_download, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_download:
+                acoesPresenter.saveAcoes();
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 
     }
 
@@ -91,4 +115,27 @@ public class AcoesActivity extends AppCompatActivity implements AcoesView{
     public void hideLoading() {
         loadingLayout.setVisibility(View.GONE);
     }
+
+
+
+    @Override
+    public void saveInSharedPreferences(String jsonAcoes) {
+        //salva json dos filmes para trabalhar ofline
+        SharedPreferences.Editor editor = getSharedPreferences("acoes_json",MODE_PRIVATE).edit();
+        editor.putString("acoes_entity_json", jsonAcoes);
+        editor.apply();
+        showMessage("Informações salvas com sucesso");
+    }
+
+    @Override
+    public void workOffline() {
+        SharedPreferences preferences = getSharedPreferences("acoes_json", MODE_PRIVATE);
+        String jsonAcoes = preferences.getString("acoes_entity_json", null);
+
+        AcoesListEntity acoesListEntity = new Gson().fromJson(jsonAcoes, AcoesListEntity.class);
+        List<AcaoEntity> acoesList = acoesListEntity.getAcoes();
+        setList(acoesList);
+
+    }
+
 }

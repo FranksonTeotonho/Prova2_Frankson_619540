@@ -3,6 +3,7 @@ package com.example.frankson.prova2_frankson_619540.Acoes;
 import com.example.frankson.prova2_frankson_619540.entity.AcaoEntity;
 import com.example.frankson.prova2_frankson_619540.entity.AcoesListEntity;
 import com.example.frankson.prova2_frankson_619540.network.api.Desafio2Api;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import retrofit2.Response;
 public class AcoesPresenter {
     private AcoesView acoesView;
     private List<AcaoEntity> acoesList = new ArrayList<>();
-
+    private AcoesListEntity acoesListEntity;
     AcoesPresenter(AcoesView acoesView){
         this.acoesView = acoesView;
     }
@@ -30,7 +31,7 @@ public class AcoesPresenter {
             @Override
             public void onResponse(Call<AcoesListEntity> call, Response<AcoesListEntity> response) {
 
-                AcoesListEntity acoesListEntity = response.body();
+                acoesListEntity = response.body();
 
                 if(acoesListEntity != null && acoesListEntity.getAcoes() != null){
 
@@ -45,8 +46,18 @@ public class AcoesPresenter {
             @Override
             public void onFailure(Call<AcoesListEntity> call, Throwable t) {
                 acoesView.showMessage("Falha no acesso ao servidor");
+                acoesView.workOffline();
                 acoesView.hideLoading();
             }
         });
     }
+
+    void saveAcoes() {
+        String jsonAcoesEntity = new Gson().toJson(acoesListEntity);
+        //moviesView.showMessage(jsonMovieEntity);
+        acoesView.saveInSharedPreferences(jsonAcoesEntity);
+    }
+
+
+
 }

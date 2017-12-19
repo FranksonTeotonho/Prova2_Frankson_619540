@@ -10,8 +10,10 @@ import java.util.List;
 
 interface AcoesView {
     void setList(List<AcaoEntity> acoesList);
+    void saveInSharedPreferences(String jsonMovieEntity);
     void showMessage(String msg);
     void showLoading();
     void hideLoading();
+    void workOffline();
 
 }
