@@ -132,9 +132,13 @@ public class AcoesActivity extends AppCompatActivity implements AcoesView{
         SharedPreferences preferences = getSharedPreferences("acoes_json", MODE_PRIVATE);
         String jsonAcoes = preferences.getString("acoes_entity_json", null);
 
-        AcoesListEntity acoesListEntity = new Gson().fromJson(jsonAcoes, AcoesListEntity.class);
-        List<AcaoEntity> acoesList = acoesListEntity.getAcoes();
-        setList(acoesList);
+        //Caso não tenha nenhum dado salvo
+        if(jsonAcoes != null){
+            AcoesListEntity acoesListEntity = new Gson().fromJson(jsonAcoes, AcoesListEntity.class);
+            List<AcaoEntity> acoesList = acoesListEntity.getAcoes();
+            setList(acoesList);
+        }
+
 
     }
 
