@@ -41,7 +41,6 @@ public class AcoesActivity extends AppCompatActivity implements AcoesView{
         //Altera o titulo da action bar ActionBar
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Ações");
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         ButterKnife.bind(this);
@@ -120,7 +119,7 @@ public class AcoesActivity extends AppCompatActivity implements AcoesView{
 
     @Override
     public void saveInSharedPreferences(String jsonAcoes) {
-        //salva json dos filmes para trabalhar ofline
+        //salva json das para trabalhar ofline
         SharedPreferences.Editor editor = getSharedPreferences("acoes_json",MODE_PRIVATE).edit();
         editor.putString("acoes_entity_json", jsonAcoes);
         editor.apply();
