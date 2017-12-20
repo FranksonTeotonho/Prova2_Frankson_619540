@@ -54,7 +54,6 @@ public class AcoesPresenter {
 
     void saveAcoes() {
         String jsonAcoesEntity = new Gson().toJson(acoesListEntity);
-        //moviesView.showMessage(jsonMovieEntity);
         acoesView.saveInSharedPreferences(jsonAcoesEntity);
     }
 

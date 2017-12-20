@@ -85,7 +85,6 @@ public class AcoesActivity extends AppCompatActivity implements AcoesView{
                 intent.putExtra("Description", acoesList.get(position).getDescription());
                 intent.putExtra("Site", acoesList.get(position).getSite());
                 startActivity(intent);
-                //Toast.makeText(AcoesActivity.this, "Clique rápido", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -119,7 +118,7 @@ public class AcoesActivity extends AppCompatActivity implements AcoesView{
 
     @Override
     public void saveInSharedPreferences(String jsonAcoes) {
-        //salva json das para trabalhar ofline
+        //salva json das açoes para trabalhar ofline
         SharedPreferences.Editor editor = getSharedPreferences("acoes_json",MODE_PRIVATE).edit();
         editor.putString("acoes_entity_json", jsonAcoes);
         editor.apply();
@@ -131,7 +130,7 @@ public class AcoesActivity extends AppCompatActivity implements AcoesView{
         SharedPreferences preferences = getSharedPreferences("acoes_json", MODE_PRIVATE);
         String jsonAcoes = preferences.getString("acoes_entity_json", null);
 
-        //Caso não tenha nenhum dado salvo
+        //Caso não tenha nenhum dado salvo, não entra no if
         if(jsonAcoes != null){
             showMessage("Dados salvos anteriormente");
             AcoesListEntity acoesListEntity = new Gson().fromJson(jsonAcoes, AcoesListEntity.class);
