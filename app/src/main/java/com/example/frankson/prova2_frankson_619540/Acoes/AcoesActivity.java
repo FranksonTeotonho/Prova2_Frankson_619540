@@ -133,6 +133,7 @@ public class AcoesActivity extends AppCompatActivity implements AcoesView{
 
         //Caso não tenha nenhum dado salvo
         if(jsonAcoes != null){
+            showMessage("Dados salvos anteriormente");
             AcoesListEntity acoesListEntity = new Gson().fromJson(jsonAcoes, AcoesListEntity.class);
             List<AcaoEntity> acoesList = acoesListEntity.getAcoes();
             setList(acoesList);
